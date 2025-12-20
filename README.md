@@ -1,21 +1,24 @@
-# bun-react-tailwind-template
+# Shivaraj's Portfolio
 
-To install dependencies:
+Personal portfolio website showcasing my projects and skills.
+
+## Tech Stack
+
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Bun
+
+## Development
 
 ```bash
 bun install
-```
-
-To start a development server:
-
-```bash
 bun dev
 ```
 
-To run for production:
+## Production
 
 ```bash
 bun start
 ```
-
-This project was created using `bun init` in bun v1.2.19. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
