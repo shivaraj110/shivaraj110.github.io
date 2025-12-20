@@ -90,14 +90,14 @@ export function App() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <motion.div
+          <motion.img
+            src="https://1d6kykqofq.ufs.sh/f/fVvo0hHNtQOLCf0Acwq5yAXNESIdiU7ftTq3e1wl2s4Lamp8"
+            alt="Shivaraj"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-2xl font-bold mb-6"
-          >
-            S
-          </motion.div>
+            className="w-20 h-20 rounded-full object-cover mb-6"
+          />
           <h1 className="text-5xl font-bold mb-4">Shivaraj</h1>
           <p className="text-xl text-neutral-400 mb-4">
             Software Engineer
