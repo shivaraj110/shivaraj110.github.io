@@ -1,4 +1,5 @@
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
+import { useState } from "react";
 import "./index.css";
 
 const projects = [
@@ -81,8 +82,31 @@ const skills = [
 ];
 
 export function App() {
+  const [isImageExpanded, setIsImageExpanded] = useState(false);
+
   return (
     <div className="min-h-screen bg-neutral-950 text-white px-6 py-20">
+      <AnimatePresence>
+        {isImageExpanded && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsImageExpanded(false)}
+            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center cursor-pointer"
+          >
+            <motion.img
+              src="https://1d6kykqofq.ufs.sh/f/fVvo0hHNtQOLCf0Acwq5yAXNESIdiU7ftTq3e1wl2s4Lamp8"
+              alt="Shivaraj"
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.5, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="w-80 h-80 rounded-full object-cover"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className="max-w-3xl mx-auto">
         <motion.header
           initial={{ opacity: 0, y: 20 }}
@@ -96,7 +120,9 @@ export function App() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="w-20 h-20 rounded-full object-cover mb-6"
+            onClick={() => setIsImageExpanded(true)}
+            whileHover={{ scale: 1.1 }}
+            className="w-20 h-20 rounded-full object-cover mb-6 cursor-pointer"
           />
           <h1 className="text-5xl font-bold mb-4">Shivaraj</h1>
           <p className="text-xl text-neutral-400 mb-4">
