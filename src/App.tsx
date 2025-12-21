@@ -15,7 +15,7 @@ const projects = [
     name: "BlogStack",
     description: "Full-stack blogging platform with cross-posting support",
     tech: "Remix, TypeScript, Prisma, PostgreSQL",
-    github: "https://github.com/BlogStack110/app",
+    github: "https://github.com/shivaraj110/BlogStack-remix",
     live: "https://blogstack-ruby.vercel.app",
     stars: 1,
   },
@@ -23,7 +23,7 @@ const projects = [
     name: "ShelfCook",
     description: "Mobile app for recipe management and meal planning",
     tech: "React Native, Expo, TypeScript",
-    github: "https://github.com/shivaraj110/ShelfCook",
+    github: "https://github.com/shivaraj110/sc-newui",
     live: "https://shelfcook.netlify.app/",
   },
   {
@@ -125,12 +125,10 @@ export function App() {
             className="w-20 h-20 rounded-full object-cover mb-6 cursor-pointer"
           />
           <h1 className="text-5xl font-bold mb-4">Shivaraj</h1>
-          <p className="text-xl text-neutral-400 mb-4">
-            Software Engineer
-          </p>
+          <p className="text-xl text-neutral-400 mb-4">Software Engineer</p>
           <p className="text-neutral-500 leading-relaxed">
-            Building web apps, CLI tools, and mobile applications from Bagalkot, Karnataka.
-            36 repositories, primarily TypeScript. Neovim enthusiast.
+            Building web apps, CLI tools, and mobile applications from Bagalkot,
+            Karnataka. 36 repositories, primarily TypeScript. Neovim enthusiast.
           </p>
           <div className="flex gap-4 mt-6">
             <motion.a
@@ -162,7 +160,9 @@ export function App() {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="mb-16"
         >
-          <h2 className="text-2xl font-semibold mb-6 text-neutral-200">Skills</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-neutral-200">
+            Skills
+          </h2>
           <div className="flex flex-wrap gap-2">
             {skills.map((skill, i) => (
               <motion.span
@@ -185,7 +185,9 @@ export function App() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mb-16"
         >
-          <h2 className="text-2xl font-semibold mb-6 text-neutral-200">Projects</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-neutral-200">
+            Projects
+          </h2>
           <div className="grid gap-4">
             {projects.map((project, i) => (
               <motion.div
@@ -200,14 +202,20 @@ export function App() {
                   <h3 className="text-lg font-medium">{project.name}</h3>
                   {project.stars && (
                     <span className="text-xs text-yellow-500 flex items-center gap-1">
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <svg
+                        className="w-3 h-3"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
                       {project.stars}
                     </span>
                   )}
                 </div>
-                <p className="text-neutral-500 text-sm">{project.description}</p>
+                <p className="text-neutral-500 text-sm">
+                  {project.description}
+                </p>
                 <p className="text-neutral-600 text-xs mt-2">{project.tech}</p>
                 <div className="flex gap-3 mt-4">
                   <motion.a
