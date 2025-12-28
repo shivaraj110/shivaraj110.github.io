@@ -1,65 +1,91 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import "./index.css";
+import { getStarsCount } from "./hooks/stars";
 
-const projects = [
+const projects: {
+  name: string;
+  description: string;
+  tech: string;
+  github: string;
+  live?: string;
+  stars?: number;
+}[] = [
   {
     name: "Postboy TUI",
     description: "Terminal-based API testing tool with beautiful TUI interface",
     tech: "TypeScript, Ink, React",
-    github: "https://github.com/Postboy-tui/app",
+    github: "Postboy-tui/app",
     live: "https://www.npmjs.com/package/postboy-tui",
-    stars: 19,
+    stars: await getStarsCount("https://api.github.com/repos/Postboy-tui/app"),
   },
   {
     name: "BlogStack",
     description: "Full-stack blogging platform with cross-posting support",
     tech: "Remix, TypeScript, Prisma, PostgreSQL",
-    github: "https://github.com/shivaraj110/BlogStack-remix",
+    github: "shivaraj110/BlogStack-remix",
     live: "https://blogstack-ruby.vercel.app",
-    stars: 1,
+    stars: await getStarsCount(
+      "https://api.github.com/repos/shivaraj110/BlogStack-remix",
+    ),
   },
   {
     name: "ShelfCook",
     description: "Mobile app for recipe management and meal planning",
     tech: "React Native, Expo, TypeScript",
-    github: "https://github.com/shivaraj110/sc-newui",
+    github: "shivaraj110/sc-newui",
     live: "https://shelfcook.netlify.app/",
+    stars: await getStarsCount(
+      "https://api.github.com/repos/shivaraj110/sc-newui",
+    ),
   },
   {
     name: "Flowro Landing",
     description: "SaaS agency landing page with modern animations",
     tech: "TypeScript, React, Tailwind",
-    github: "https://github.com/shivaraj110/Flowro-landing",
+    github: "shivaraj110/Flowro-landing",
     live: "https://flowro.netlify.app/",
-    stars: 2,
+    stars: await getStarsCount(
+      "https://api.github.com/repos/shivaraj110/Flowro-landing",
+    ),
   },
   {
     name: "FontAI",
     description: "AI-powered font picker for designers and developers",
     tech: "TypeScript, React, Vite, Tailwind",
-    github: "https://github.com/shivaraj110/fontAI",
+    github: "shivaraj110/fontAI",
     live: "https://fontpickerai.netlify.app/",
+    stars: await getStarsCount(
+      "https://api.github.com/repos/shivaraj110/fontAI",
+    ),
   },
   {
     name: "Pomo TUI",
     description: "Minimalist terminal pomodoro timer for productivity",
     tech: "TypeScript, Ink",
-    github: "https://github.com/shivaraj110/pomo-tui",
+    github: "shivaraj110/pomo-tui",
     live: "https://www.npmjs.com/package/pomo-tui",
-    stars: 1,
+    stars: await getStarsCount(
+      "https://api.github.com/repos/shivaraj110/pomo-tui",
+    ),
   },
   {
     name: "StoreLinks",
     description: "Browser extension for managing categorized bookmarks",
     tech: "TypeScript, Chrome Extension API",
-    github: "https://github.com/shivaraj110/store-links",
+    github: "shivaraj110/store-links",
+    stars: await getStarsCount(
+      "https://api.github.com/repos/shivaraj110/store-links",
+    ),
   },
   {
     name: "WebRTC Signaling Server",
     description: "Real-time signaling server for peer-to-peer connections",
     tech: "TypeScript, WebSockets",
-    github: "https://github.com/shivaraj110/webRTC-signaling-server",
+    github: "shivaraj110/webRTC-signaling-server",
+    stars: await getStarsCount(
+      "https://api.github.com/repos/shivaraj110/webRTC-signaling-server",
+    ),
   },
 ];
 
@@ -132,7 +158,7 @@ export function App() {
           </p>
           <div className="flex gap-4 mt-6">
             <motion.a
-              href="https://github.com/shivaraj110"
+              href="shivaraj110"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
@@ -200,18 +226,17 @@ export function App() {
               >
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="text-lg font-medium">{project.name}</h3>
-                  {project.stars && (
-                    <span className="text-xs text-yellow-500 flex items-center gap-1">
-                      <svg
-                        className="w-3 h-3"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                      {project.stars}
-                    </span>
-                  )}
+                  <span className="text-xs text-yellow-500 flex items-center gap-1">
+                    <svg
+                      className="w-3 h-3"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+
+                    {project.stars}
+                  </span>
                 </div>
                 <p className="text-neutral-500 text-sm">
                   {project.description}
@@ -219,7 +244,7 @@ export function App() {
                 <p className="text-neutral-600 text-xs mt-2">{project.tech}</p>
                 <div className="flex gap-3 mt-4">
                   <motion.a
-                    href={project.github}
+                    href={"https://github.com/" + project.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.05 }}
