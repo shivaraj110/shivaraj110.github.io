@@ -1,6 +1,42 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Subtle selection styling */
+::selection {
+  background-color: rgba(99, 102, 241, 0.3);
+  color: white;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(23, 23, 23);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(64, 64, 64);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(82, 82, 82);
 }
