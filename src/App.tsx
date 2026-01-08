@@ -22,7 +22,7 @@ export function App() {
       />
 
       {/* Main Content */}
-      <div className="relative max-w-2xl mx-auto px-6 py-24 md:py-32">
+      <div className="relative max-w-2xl mx-auto px-4 sm:px-6 py-16 sm:py-24 md:py-32">
         <Header onImageClick={() => setIsImageExpanded(true)} />
         <Experience />
         <Skills />

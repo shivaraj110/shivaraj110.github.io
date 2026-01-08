@@ -98,20 +98,20 @@ export function Projects() {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-      className="mb-20"
+      className="mb-12 sm:mb-16 md:mb-20"
     >
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full flex items-center justify-between group mb-5"
+        className="w-full flex items-center justify-between group mb-4 sm:mb-5"
       >
-        <h2 className="text-sm font-medium text-zinc-500 uppercase tracking-wider">
+        <h2 className="text-xs sm:text-sm font-medium text-zinc-500 uppercase tracking-wider">
           Projects
           <span className="ml-2 text-zinc-600">({projects.length})</span>
         </h2>
         <motion.div
           animate={{ rotate: isExpanded ? 180 : 0 }}
           transition={{ duration: 0.2 }}
-          className="p-1.5 rounded-md text-zinc-500 hover:text-zinc-400 hover:bg-zinc-800/50 transition-colors duration-200"
+          className="p-1 sm:p-1.5 rounded-md text-zinc-500 hover:text-zinc-400 hover:bg-zinc-800/50 transition-colors duration-200"
         >
           <svg
             className="w-4 h-4"
@@ -139,18 +139,18 @@ export function Projects() {
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="flex flex-wrap gap-2">
-              {projects.slice(0, 4).map((project) => (
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              {projects.slice(0, 3).map((project) => (
                 <span
                   key={project.name}
-                  className="px-3 py-1.5 text-sm text-zinc-400 bg-zinc-900/50 border border-zinc-800/50 rounded-md"
+                  className="px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm text-zinc-400 bg-zinc-900/50 border border-zinc-800/50 rounded-md"
                 >
                   {project.name}
                 </span>
               ))}
-              {projects.length > 4 && (
-                <span className="px-3 py-1.5 text-sm text-zinc-500 bg-zinc-900/30 border border-zinc-800/30 rounded-md">
-                  +{projects.length - 4} more
+              {projects.length > 3 && (
+                <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm text-zinc-500 bg-zinc-900/30 border border-zinc-800/30 rounded-md">
+                  +{projects.length - 3} more
                 </span>
               )}
             </div>
@@ -168,7 +168,7 @@ export function Projects() {
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="overflow-hidden"
           >
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {projects.map((project, i) => (
                 <motion.article
                   key={project.name}
@@ -179,16 +179,16 @@ export function Projects() {
                     delay: i * 0.04,
                     ease: "easeOut",
                   }}
-                  className="group p-5 bg-zinc-900/30 hover:bg-zinc-900/50 border border-zinc-800/40 hover:border-zinc-700/50 rounded-xl transition-all duration-300"
+                  className="group p-4 sm:p-5 bg-zinc-900/30 hover:bg-zinc-900/50 border border-zinc-800/40 hover:border-zinc-700/50 rounded-xl transition-all duration-300"
                 >
-                  <div className="flex items-start justify-between gap-4 mb-2">
-                    <h3 className="font-medium text-zinc-200 group-hover:text-white transition-colors duration-200">
+                  <div className="flex items-start justify-between gap-3 sm:gap-4 mb-2">
+                    <h3 className="font-medium text-sm sm:text-base text-zinc-200 group-hover:text-white transition-colors duration-200">
                       {project.name}
                     </h3>
                     {project.stars !== undefined && project.stars > 0 && (
-                      <span className="flex items-center gap-1 text-xs text-zinc-500">
+                      <span className="flex items-center gap-1 text-xs text-zinc-500 shrink-0">
                         <svg
-                          className="w-3.5 h-3.5"
+                          className="w-3 sm:w-3.5 h-3 sm:h-3.5"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -199,21 +199,23 @@ export function Projects() {
                     )}
                   </div>
 
-                  <p className="text-sm text-zinc-500 leading-relaxed mb-3">
+                  <p className="text-xs sm:text-sm text-zinc-500 leading-relaxed mb-2 sm:mb-3">
                     {project.description}
                   </p>
 
-                  <p className="text-xs text-zinc-600 mb-4">{project.tech}</p>
+                  <p className="text-xs text-zinc-600 mb-3 sm:mb-4">
+                    {project.tech}
+                  </p>
 
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     <a
                       href={"https://github.com/" + project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-zinc-400 hover:text-zinc-300 bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/30 hover:border-zinc-600/50 rounded-md transition-colors duration-200"
+                      className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs text-zinc-400 hover:text-zinc-300 bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/30 hover:border-zinc-600/50 rounded-md transition-colors duration-200"
                     >
                       <svg
-                        className="w-3.5 h-3.5"
+                        className="w-3 sm:w-3.5 h-3 sm:h-3.5"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -230,10 +232,10 @@ export function Projects() {
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-zinc-400 hover:text-zinc-300 bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/30 hover:border-zinc-600/50 rounded-md transition-colors duration-200"
+                        className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs text-zinc-400 hover:text-zinc-300 bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/30 hover:border-zinc-600/50 rounded-md transition-colors duration-200"
                       >
                         <svg
-                          className="w-3.5 h-3.5"
+                          className="w-3 sm:w-3.5 h-3 sm:h-3.5"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"

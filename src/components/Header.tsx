@@ -10,34 +10,36 @@ export function Header({ onImageClick }: HeaderProps) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="mb-20"
+      className="mb-12 sm:mb-16 md:mb-20"
     >
       <motion.img
         src="https://1d6kykqofq.ufs.sh/f/fVvo0hHNtQOLCf0Acwq5yAXNESIdiU7ftTq3e1wl2s4Lamp8"
         alt="Shivaraj"
         onClick={onImageClick}
-        className="w-16 h-16 rounded-xl object-cover mb-8 cursor-pointer ring-1 ring-zinc-800 hover:ring-zinc-700 transition-all duration-300"
+        className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl object-cover mb-6 sm:mb-8 cursor-pointer ring-1 ring-zinc-800 hover:ring-zinc-700 transition-all duration-300"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       />
 
-      <h1 className="text-3xl md:text-4xl font-semibold tracking-tight mb-3">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight mb-2 sm:mb-3">
         Shivaraj
       </h1>
 
-      <p className="text-lg text-zinc-400 mb-4">Software Engineer</p>
+      <p className="text-base sm:text-lg text-zinc-400 mb-3 sm:mb-4">
+        Software Engineer
+      </p>
 
-      <p className="text-zinc-500 leading-relaxed max-w-lg">
+      <p className="text-sm sm:text-base text-zinc-500 leading-relaxed max-w-lg">
         Building web apps, CLI tools, and mobile applications from Bagalkot,
         Karnataka. Primarily TypeScript. Neovim enthusiast.
       </p>
 
-      <div className="flex gap-3 mt-8">
+      <div className="flex flex-wrap gap-2 sm:gap-3 mt-6 sm:mt-8">
         <motion.a
           href="https://github.com/shivaraj110"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-4 py-2 text-sm text-zinc-300 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 rounded-lg transition-colors duration-200"
+          className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-sm text-zinc-300 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 rounded-lg transition-colors duration-200"
           whileHover={{ y: -1 }}
           whileTap={{ y: 0 }}
         >
@@ -54,7 +56,7 @@ export function Header({ onImageClick }: HeaderProps) {
           href="https://x.com/shivaraj_does"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-4 py-2 text-sm text-zinc-300 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 rounded-lg transition-colors duration-200"
+          className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-sm text-zinc-300 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 rounded-lg transition-colors duration-200"
           whileHover={{ y: -1 }}
           whileTap={{ y: 0 }}
         >
