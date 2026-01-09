@@ -11,7 +11,7 @@ interface Job {
 const experience: Job[] = [
   {
     company: "emp0",
-    role: "Software Engineer (contract)",
+    role: "Software Engineer",
     url: "https://emp0.com",
     from: "Jan 2026",
     to: null,
