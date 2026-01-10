@@ -3,7 +3,3 @@ export const getStarsCount = async (repo: string): Promise<number> => {
   const body = await res.json();
   return body.stargazers_count;
 };
-
-console.log(
-  getStarsCount("https://api.github.com/repos/shivaraj110/BlogStack-remix"),
-);

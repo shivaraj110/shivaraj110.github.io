@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
-import { getStarsCount } from "../hooks/stars";
+import { useState, useEffect } from "react";
 
 interface Project {
   name: string;
@@ -8,17 +7,15 @@ interface Project {
   tech: string;
   github: string;
   live?: string;
-  stars?: number;
 }
 
-const projects: Project[] = [
+const projectsData: Project[] = [
   {
     name: "Postboy TUI",
     description: "Terminal-based API testing tool with beautiful TUI interface",
     tech: "TypeScript, Ink, React",
     github: "Postboy-tui/app",
     live: "https://www.npmjs.com/package/postboy-tui",
-    stars: await getStarsCount("https://api.github.com/repos/Postboy-tui/app"),
   },
   {
     name: "BlogStack",
@@ -26,9 +23,6 @@ const projects: Project[] = [
     tech: "Remix, TypeScript, Prisma, PostgreSQL",
     github: "shivaraj110/BlogStack-remix",
     live: "https://blogstack-ruby.vercel.app",
-    stars: await getStarsCount(
-      "https://api.github.com/repos/shivaraj110/BlogStack-remix"
-    ),
   },
   {
     name: "ShelfCook",
@@ -36,9 +30,6 @@ const projects: Project[] = [
     tech: "React Native, Expo, TypeScript",
     github: "shivaraj110/sc-newui",
     live: "https://shelfcook.netlify.app/",
-    stars: await getStarsCount(
-      "https://api.github.com/repos/shivaraj110/sc-newui"
-    ),
   },
   {
     name: "Flowro Landing",
@@ -46,9 +37,6 @@ const projects: Project[] = [
     tech: "TypeScript, React, Tailwind",
     github: "shivaraj110/Flowro-landing",
     live: "https://flowro.netlify.app/",
-    stars: await getStarsCount(
-      "https://api.github.com/repos/shivaraj110/Flowro-landing"
-    ),
   },
   {
     name: "FontAI",
@@ -56,9 +44,6 @@ const projects: Project[] = [
     tech: "TypeScript, React, Vite, Tailwind",
     github: "shivaraj110/fontAI",
     live: "https://fontpickerai.netlify.app/",
-    stars: await getStarsCount(
-      "https://api.github.com/repos/shivaraj110/fontAI"
-    ),
   },
   {
     name: "Pomo TUI",
@@ -66,32 +51,53 @@ const projects: Project[] = [
     tech: "TypeScript, Ink",
     github: "shivaraj110/pomo-tui",
     live: "https://www.npmjs.com/package/pomo-tui",
-    stars: await getStarsCount(
-      "https://api.github.com/repos/shivaraj110/pomo-tui"
-    ),
   },
   {
     name: "StoreLinks",
     description: "Browser extension for managing categorized bookmarks",
     tech: "TypeScript, Chrome Extension API",
     github: "shivaraj110/store-links",
-    stars: await getStarsCount(
-      "https://api.github.com/repos/shivaraj110/store-links"
-    ),
   },
   {
     name: "WebRTC Signaling Server",
     description: "Real-time signaling server for peer-to-peer connections",
     tech: "TypeScript, WebSockets",
     github: "shivaraj110/webRTC-signaling-server",
-    stars: await getStarsCount(
-      "https://api.github.com/repos/shivaraj110/webRTC-signaling-server"
-    ),
   },
 ];
 
 export function Projects() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [stars, setStars] = useState<Record<string, number | null>>({});
+
+  useEffect(() => {
+    const fetchStars = async () => {
+      const results = await Promise.all(
+        projectsData.map(async (project) => {
+          try {
+            const res = await fetch(
+              `https://api.github.com/repos/${project.github}`
+            );
+            if (res.ok) {
+              const data = await res.json();
+              return { github: project.github, stars: data.stargazers_count ?? 0 };
+            }
+          } catch {
+            // Silently fail
+          }
+          return { github: project.github, stars: 0 };
+        })
+      );
+
+      const starsMap: Record<string, number> = {};
+      results.forEach((r) => {
+        starsMap[r.github] = r.stars;
+      });
+      setStars(starsMap);
+    };
+
+    fetchStars();
+  }, []);
 
   return (
     <motion.section
@@ -106,7 +112,7 @@ export function Projects() {
       >
         <h2 className="text-xs sm:text-sm font-medium text-zinc-500 uppercase tracking-wider">
           Projects
-          <span className="ml-2 text-zinc-600">({projects.length})</span>
+          <span className="ml-2 text-zinc-600">({projectsData.length})</span>
         </h2>
         <motion.div
           animate={{ rotate: isExpanded ? 180 : 0 }}
@@ -140,7 +146,7 @@ export function Projects() {
             className="overflow-hidden"
           >
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
-              {projects.slice(0, 3).map((project) => (
+              {projectsData.slice(0, 3).map((project) => (
                 <span
                   key={project.name}
                   className="px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm text-zinc-400 bg-zinc-900/50 border border-zinc-800/50 rounded-md"
@@ -148,9 +154,9 @@ export function Projects() {
                   {project.name}
                 </span>
               ))}
-              {projects.length > 3 && (
+              {projectsData.length > 3 && (
                 <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm text-zinc-500 bg-zinc-900/30 border border-zinc-800/30 rounded-md">
-                  +{projects.length - 3} more
+                  +{projectsData.length - 3} more
                 </span>
               )}
             </div>
@@ -169,7 +175,7 @@ export function Projects() {
             className="overflow-hidden"
           >
             <div className="space-y-2 sm:space-y-3">
-              {projects.map((project, i) => (
+              {projectsData.map((project, i) => (
                 <motion.article
                   key={project.name}
                   initial={{ opacity: 0, y: 8 }}
@@ -185,18 +191,18 @@ export function Projects() {
                     <h3 className="font-medium text-sm sm:text-base text-zinc-200 group-hover:text-white transition-colors duration-200">
                       {project.name}
                     </h3>
-                    {project.stars !== undefined && project.stars > 0 && (
-                      <span className="flex items-center gap-1 text-xs text-zinc-500 shrink-0">
-                        <svg
-                          className="w-3 sm:w-3.5 h-3 sm:h-3.5"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                        {project.stars}
-                      </span>
-                    )}
+                    <span className="flex items-center gap-1 text-xs text-zinc-500 shrink-0">
+                      <svg
+                        className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-yellow-500"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      {stars[project.github] !== undefined
+                        ? stars[project.github]
+                        : "—"}
+                    </span>
                   </div>
 
                   <p className="text-xs sm:text-sm text-zinc-500 leading-relaxed mb-2 sm:mb-3">
