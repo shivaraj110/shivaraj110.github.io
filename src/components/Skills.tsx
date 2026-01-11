@@ -11,6 +11,7 @@ const skills = [
   "PostgreSQL",
   "Prisma",
   "Redis",
+  "n8n",
   "Docker",
   "AWS",
   "GraphQL",
