@@ -76,11 +76,11 @@ export function Projects() {
         projectsData.map(async (project) => {
           try {
             const res = await fetch(
-              `https://api.github.com/repos/${project.github}`
+              `/api/stars/${encodeURIComponent(project.github)}`
             );
             if (res.ok) {
               const data = await res.json();
-              return { github: project.github, stars: data.stargazers_count ?? 0 };
+              return { github: project.github, stars: data.stars ?? 0 };
             }
           } catch {
             // Silently fail
