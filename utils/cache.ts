@@ -1,20 +1,24 @@
 import { getStarsCount } from "@/hooks/stars";
 import { Redis } from "@upstash/redis";
+import dotenv from "dotenv";
+dotenv.config();
+
 const redis = new Redis({
-  url: "https://glorious-cod-22697.upstash.io",
-  token: "AVipAAIncDE4OGRmYzNkY2I4MGM0ODZiYTBmNDdlN2U2ODBiZDFmYnAxMjI2OTc",
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
 export const getCachedStars = async (repo: string) => {
   // check for existing key
   const starKey = `stars:${repo}`;
   const cachedStars = await redis.get(starKey);
-  if (cachedStars) {
+  if (cachedStars !== null) {
+    console.log("cache hit");
     return cachedStars;
   }
 
   const starData = await getStarsCount(repo);
-
+  console.log("cache miss, creating new cache");
   await redis.set(starKey, starData.stars, { ex: 60 * 60 * 24 }); // expires after 24 hours
   return starData.stars;
 };
