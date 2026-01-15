@@ -1,11 +1,11 @@
 import { useState } from "react";
-import "./index.css";
-import { Header } from "./components/Header";
-import { ImageModal } from "./components/ImageModal";
-import { Experience } from "./components/Experience";
-import { Skills } from "./components/Skills";
-import { Projects } from "./components/v2/Projects";
-import { Footer } from "./components/Footer";
+import "../styles-v2.css";
+import { Header } from "./Header";
+import { ImageModal } from "./ImageModal";
+import { Experience } from "./Experience";
+import { Skills } from "./Skills";
+import { Projects } from "./Projects";
+import { Footer } from "./Footer";
 
 export function App() {
   const [isImageExpanded, setIsImageExpanded] = useState(false);
@@ -22,15 +22,15 @@ export function App() {
       <main className="max-w-2xl mx-auto px-6 sm:px-8 py-16 sm:py-20 md:py-28">
         <Header onImageClick={() => setIsImageExpanded(true)} />
 
-        <div className="section-divider my-10 sm:my-12" />
+        <div className="my-16 sm:my-20 h-px bg-zinc-900" />
 
         <Experience />
 
-        <div className="section-divider my-10 sm:my-12" />
+        <div className="my-16 sm:my-20 h-px bg-zinc-900" />
 
         <Skills />
 
-        <div className="section-divider my-10 sm:my-12" />
+        <div className="my-16 sm:my-20 h-px bg-zinc-900" />
 
         <Projects />
 
