@@ -7,60 +7,71 @@ interface Project {
   tech: string[];
   github: string;
   live?: string;
+  npmDownloads?: number;
 }
 
 const projectsData: Project[] = [
   {
     name: "Postboy TUI",
-    description: "Terminal-based API testing tool with beautiful TUI interface. Test REST APIs directly from your terminal.",
+    description:
+      "Terminal-based API testing tool with beautiful TUI interface. Test REST APIs directly from your terminal.",
     tech: ["TypeScript", "Ink", "React"],
     github: "Postboy-tui/app",
     live: "https://www.npmjs.com/package/postboy-tui",
+    npmDownloads: 3300,
   },
   {
     name: "BlogStack",
-    description: "Full-stack blogging platform with cross-posting support. Write once, publish everywhere.",
+    description:
+      "Full-stack blogging platform with cross-posting support. Write once, publish everywhere.",
     tech: ["Remix", "TypeScript", "Prisma"],
     github: "shivaraj110/BlogStack-remix",
     live: "https://blogstack-ruby.vercel.app",
   },
   {
     name: "ShelfCook",
-    description: "Mobile app for recipe management and meal planning with smart shopping lists.",
+    description:
+      "Mobile app for recipe management and meal planning with smart shopping lists.",
     tech: ["React Native", "Expo", "TypeScript"],
     github: "shivaraj110/sc-newui",
     live: "https://shelfcook.netlify.app/",
   },
   {
     name: "Flowro Landing",
-    description: "SaaS agency landing page with modern animations and micro-interactions.",
+    description:
+      "SaaS agency landing page with modern animations and micro-interactions.",
     tech: ["React", "Tailwind", "TypeScript"],
     github: "shivaraj110/Flowro-landing",
     live: "https://flowro.netlify.app/",
   },
   {
     name: "FontAI",
-    description: "AI-powered font picker with intelligent pairing suggestions based on your design context.",
+    description:
+      "AI-powered font picker with intelligent pairing suggestions based on your design context.",
     tech: ["TypeScript", "React", "Vite"],
     github: "shivaraj110/fontAI",
     live: "https://fontpickerai.netlify.app/",
   },
   {
     name: "Pomo TUI",
-    description: "Minimalist terminal pomodoro timer for focused productivity sessions.",
+    description:
+      "Minimalist terminal pomodoro timer for focused productivity sessions.",
     tech: ["TypeScript", "Ink"],
     github: "shivaraj110/pomo-tui",
     live: "https://www.npmjs.com/package/pomo-tui",
+    npmDownloads: 1020,
   },
   {
     name: "StoreLinks",
-    description: "Browser extension for smart bookmark management and categorization.",
+    description:
+      "Browser extension for smart bookmark management and categorization.",
     tech: ["TypeScript", "Chrome API"],
     github: "shivaraj110/store-links",
   },
   {
     name: "WebRTC Signaling",
-    description: "Real-time signaling server for peer-to-peer WebRTC connections.",
+    description:
+      "Real-time signaling server for peer-to-peer WebRTC connections.",
     tech: ["TypeScript", "WebSockets"],
     github: "shivaraj110/webRTC-signaling-server",
   },
@@ -75,7 +86,9 @@ export function Projects() {
       const results = await Promise.all(
         projectsData.map(async (project) => {
           try {
-            const res = await fetch(`/api/stars/${encodeURIComponent(project.github)}`);
+            const res = await fetch(
+              `/api/stars/${encodeURIComponent(project.github)}`,
+            );
             if (res.ok) {
               const data = await res.json();
               return { github: project.github, stars: data.stars ?? 0 };
@@ -84,7 +97,7 @@ export function Projects() {
             // ignore
           }
           return { github: project.github, stars: 0 };
-        })
+        }),
       );
       const starsMap: Record<string, number> = {};
       results.forEach((r) => (starsMap[r.github] = r.stars));
@@ -136,7 +149,9 @@ export function Projects() {
                 }`}
               >
                 <span className="flex items-center gap-2">
-                  <span className={`w-1.5 h-1.5 rounded-full transition-colors ${isSelected ? "bg-emerald-500" : "bg-zinc-700 group-hover:bg-zinc-600"}`} />
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full transition-colors ${isSelected ? "bg-emerald-500" : "bg-zinc-700 group-hover:bg-zinc-600"}`}
+                  />
                   {project.name}
                 </span>
                 {starCount > 0 && (
@@ -145,7 +160,7 @@ export function Projects() {
               </motion.button>
             );
           })}
-          
+
           {/* View all link */}
           <a
             href="https://github.com/shivaraj110?tab=repositories"
@@ -173,7 +188,7 @@ export function Projects() {
                 <h3 className="text-2xl md:text-3xl text-zinc-100 font-semibold tracking-tight mb-6">
                   {selectedProject.name}
                 </h3>
-                
+
                 {/* Description */}
                 <p className="text-zinc-400 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
                   {selectedProject.description}
@@ -184,16 +199,19 @@ export function Projects() {
                   <span className="text-[11px] text-zinc-600 uppercase tracking-widest mb-3 block">
                     Built with
                   </span>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap mb-3 gap-3">
                     {selectedProject.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="text-sm text-zinc-400"
-                      >
+                      <span key={t} className="text-sm text-zinc-400">
                         {t}
                       </span>
                     ))}
                   </div>
+
+                  <span className="text-sm text-zinc-400">
+                    {selectedProject.npmDownloads
+                      ? `${selectedProject.npmDownloads}+ downloads`
+                      : ""}
+                  </span>
                 </div>
 
                 {/* Links */}
