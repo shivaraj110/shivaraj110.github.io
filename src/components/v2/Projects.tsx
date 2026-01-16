@@ -7,7 +7,7 @@ interface Project {
   tech: string[];
   github: string;
   live?: string;
-  npmDownloads?: number;
+  npmPackage?: string;
 }
 
 const projectsData: Project[] = [
@@ -18,7 +18,7 @@ const projectsData: Project[] = [
     tech: ["TypeScript", "Ink", "React"],
     github: "Postboy-tui/app",
     live: "https://www.npmjs.com/package/postboy-tui",
-    npmDownloads: 3300,
+    npmPackage: "postboy-tui",
   },
   {
     name: "BlogStack",
@@ -59,7 +59,7 @@ const projectsData: Project[] = [
     tech: ["TypeScript", "Ink"],
     github: "shivaraj110/pomo-tui",
     live: "https://www.npmjs.com/package/pomo-tui",
-    npmDownloads: 1020,
+    npmPackage: "pomo-tui",
   },
   {
     name: "StoreLinks",
@@ -79,6 +79,7 @@ const projectsData: Project[] = [
 
 export function Projects() {
   const [stars, setStars] = useState<Record<string, number>>({});
+  const [downloads, setDownloads] = useState<Record<string, number>>({});
   const [selected, setSelected] = useState<number>(0);
 
   useEffect(() => {
@@ -103,7 +104,36 @@ export function Projects() {
       results.forEach((r) => (starsMap[r.github] = r.stars));
       setStars(starsMap);
     };
+
+    const fetchDownloads = async () => {
+      const results = await Promise.all(
+        projectsData
+          .filter((project) => project.npmPackage)
+          .map(async (project) => {
+            try {
+              const res = await fetch(
+                `/api/downloads/${encodeURIComponent(project.npmPackage!)}`,
+              );
+              if (res.ok) {
+                const data = await res.json();
+                return {
+                  package: project.npmPackage!,
+                  downloads: data.downloads ?? 0,
+                };
+              }
+            } catch {
+              // ignore
+            }
+            return { package: project.npmPackage!, downloads: 0 };
+          }),
+      );
+      const downloadsMap: Record<string, number> = {};
+      results.forEach((r) => (downloadsMap[r.package] = r.downloads));
+      setDownloads(downloadsMap);
+    };
+
     fetchStars();
+    fetchDownloads();
   }, []);
 
   const selectedProject = projectsData[selected];
@@ -142,11 +172,10 @@ export function Projects() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.03 * index, duration: 0.3 }}
                 onClick={() => setSelected(index)}
-                className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group ${
-                  isSelected
-                    ? "bg-zinc-800/50 text-zinc-100"
-                    : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-900/50"
-                }`}
+                className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group ${isSelected
+                  ? "bg-zinc-800/50 text-zinc-100"
+                  : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-900/50"
+                  }`}
               >
                 <span className="flex items-center gap-2">
                   <span
@@ -207,11 +236,13 @@ export function Projects() {
                     ))}
                   </div>
 
-                  <span className="text-sm text-zinc-400">
-                    {selectedProject.npmDownloads
-                      ? `${selectedProject.npmDownloads}+ downloads`
-                      : ""}
-                  </span>
+                  {selectedProject.npmPackage && (
+                    <span className="text-sm text-zinc-400">
+                      {typeof downloads[selectedProject.npmPackage] === "number"
+                        ? `${downloads[selectedProject.npmPackage]?.toLocaleString() ?? 0} downloads (last year)`
+                        : "Loading downloads..."}
+                    </span>
+                  )}
                 </div>
 
                 {/* Links */}
