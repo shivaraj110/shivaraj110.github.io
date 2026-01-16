@@ -3,6 +3,9 @@ import { motion } from "motion/react";
 const skills = [
   "TypeScript",
   "JavaScript",
+  "C",
+  "Express",
+  "Drizzle",
   "Python",
   "React",
   "Next.js",
