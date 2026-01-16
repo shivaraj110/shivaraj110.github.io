@@ -41,7 +41,6 @@ export default async function handler(
 
   const decodedRepo = decodeURIComponent(repo);
   const stars = await getStarsCount(decodedRepo);
-
   // Cache at Vercel edge for 24 hours
   res.setHeader("Cache-Control", "s-maxage=86400, stale-while-revalidate");
   return res.status(200).json({ repo: decodedRepo, stars });
