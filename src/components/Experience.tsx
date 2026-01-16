@@ -16,7 +16,7 @@ const experience: Job[] = [
     url: "https://emp0.com",
     from: "Jan 2026",
     to: null,
-    description: "Building scalable web applications and developer tools",
+    description: "converting n8n flows to products",
   },
 ];
 
@@ -34,7 +34,7 @@ export function Experience() {
         </h2>
         <div className="flex-1 h-px bg-gradient-to-r from-zinc-800/50 to-transparent" />
       </div>
-      
+
       <div className="space-y-4">
         {experience.map((job, index) => (
           <motion.div
@@ -48,7 +48,7 @@ export function Experience() {
             {!job.to && (
               <div className="absolute left-0 top-6 bottom-6 w-0.5 bg-gradient-to-b from-emerald-400 to-emerald-400/20 rounded-full" />
             )}
-            
+
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
               <div className="flex-1 min-w-0 pl-3 sm:pl-4">
                 {/* Role & Status */}
@@ -66,7 +66,7 @@ export function Experience() {
                     </span>
                   )}
                 </div>
-                
+
                 {/* Company */}
                 <a
                   href={job.url}
@@ -78,7 +78,7 @@ export function Experience() {
                   {job.company}
                   <ExternalLinkIcon />
                 </a>
-                
+
                 {/* Description */}
                 {job.description && (
                   <p className="text-sm text-zinc-500 leading-relaxed mt-2">
@@ -86,7 +86,7 @@ export function Experience() {
                   </p>
                 )}
               </div>
-              
+
               {/* Date */}
               <div className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-zinc-500 bg-zinc-800/40 rounded-lg whitespace-nowrap shrink-0 self-start sm:self-auto">
                 <CalendarIcon />
@@ -103,24 +103,54 @@ export function Experience() {
 // Icons
 function BuildingIcon() {
   return (
-    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+    <svg
+      className="w-4 h-4"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+      />
     </svg>
   );
 }
 
 function ExternalLinkIcon() {
   return (
-    <svg className="w-3 h-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+    <svg
+      className="w-3 h-3 opacity-50"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+      />
     </svg>
   );
 }
 
 function CalendarIcon() {
   return (
-    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    <svg
+      className="w-3.5 h-3.5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+      />
     </svg>
   );
 }
