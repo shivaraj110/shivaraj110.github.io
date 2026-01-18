@@ -16,7 +16,7 @@ const experience: Job[] = [
     url: "https://emp0.com",
     from: "Jan 2026",
     to: null,
-    description: "converting n8n flows to products",
+    description: "Building agentic workflows",
   },
 ];
 
