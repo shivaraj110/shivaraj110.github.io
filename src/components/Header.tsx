@@ -66,8 +66,8 @@ export function Header({ onImageClick }: HeaderProps) {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="text-sm sm:text-base text-zinc-500 leading-relaxed max-w-lg"
       >
-        Building web apps, CLI tools, and mobile applications from{" "}
-        <span className="text-zinc-400">Bagalkot, Karnataka</span>. Primarily{" "}
+        Building web apps, CLI tools, and mobile applications. I use{" "}
+        <span className="text-zinc-400">Arch</span> btw. Primarily{" "}
         <span className="text-violet-400/90">TypeScript</span>.{" "}
         <span className="text-zinc-400">Neovim enthusiast</span>.
       </motion.p>
