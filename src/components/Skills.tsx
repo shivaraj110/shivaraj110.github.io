@@ -1,20 +1,28 @@
 import { motion } from "motion/react";
+import { RetroWindow } from "./RetroWindow";
+
+interface SkillsProps {
+  onBringToFront?: () => void;
+  zIndex?: number;
+  width?: number;
+  draggable?: boolean;
+}
 
 const skills = [
   "TypeScript",
   "JavaScript",
-  "C",
-  "Express",
-  "Drizzle",
   "Python",
+  "C",
   "React",
   "Next.js",
   "Remix",
   "React Native",
   "Tailwind",
   "Node.js",
+  "Express",
   "PostgreSQL",
   "Prisma",
+  "Drizzle",
   "Redis",
   "GraphQL",
   "Docker",
@@ -24,34 +32,41 @@ const skills = [
   "Linux",
 ];
 
-export function Skills() {
+export function Skills({ onBringToFront, zIndex, width, draggable = true }: SkillsProps) {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-      className="mb-8 sm:mb-12"
-    >
-      <div className="flex items-center gap-3 mb-6">
-        <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-widest">
-          Skills
-        </h2>
-        <div className="flex-1 h-px bg-gradient-to-r from-zinc-800/50 to-transparent" />
+    <RetroWindow title="tools.pdf" onBringToFront={onBringToFront} zIndex={zIndex} width={width} draggable={draggable}>
+      <div className="space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.4 }}
+          className="p-4 bg-[#3178C6]/10 rounded-lg border-2 border-[#3178C6]/30"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-[#3178C6] flex items-center justify-center">
+              <span className="text-white font-mono text-sm font-bold">TS</span>
+            </div>
+            <div>
+              <span className="font-mono text-base text-[var(--color-text)] font-semibold">TypeScript</span>
+              <p className="text-xs text-[var(--color-text-subtle)] font-mono">Primary language</p>
+            </div>
+          </div>
+        </motion.div>
+        
+        <div className="flex flex-wrap gap-1.5">
+          {skills.map((skill, index) => (
+            <motion.span
+              key={skill}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 + index * 0.02, duration: 0.3 }}
+              className="px-2 py-1 text-xs font-mono text-[var(--color-text-muted)] bg-[var(--color-bg-secondary)]/40 border border-[var(--color-border)]/50 rounded hover:border-[var(--color-border-strong)] transition-colors cursor-default"
+            >
+              {skill}
+            </motion.span>
+          ))}
+        </div>
       </div>
-
-      <div className="flex flex-wrap gap-2">
-        {skills.map((skill, index) => (
-          <motion.span
-            key={skill}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.2 + index * 0.02 }}
-            className="px-3 py-1.5 text-sm text-zinc-400 bg-zinc-900/50 border border-zinc-800/50 rounded-lg hover:text-zinc-300 hover:border-zinc-700/50 transition-colors cursor-default"
-          >
-            {skill}
-          </motion.span>
-        ))}
-      </div>
-    </motion.section>
+    </RetroWindow>
   );
 }
