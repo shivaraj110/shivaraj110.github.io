@@ -21,14 +21,26 @@ interface Project {
 const projectsData: Project[] = [
   {
     name: "Ikkii",
-    description: "Crypto dueling arena for mobile gamers. Create or join 1v1 duels with stake, play matches in supported games, winner takes the pot via trustless Solana escrow.",
-    tech: ["React Native", "Expo", "Solana", "Anchor", "Rust", "Bun", "Hono", "Drizzle", "PostgreSQL"],
-    github: "shivaraj110/ikki",
+    description:
+      "Crypto dueling arena for mobile gamers. Create or join 1v1 duels with stake, play matches in supported games, winner takes the pot via trustless Solana escrow.",
+    tech: [
+      "React Native",
+      "Expo",
+      "Solana",
+      "Anchor",
+      "Rust",
+      "Bun",
+      "Hono",
+      "Drizzle",
+      "PostgreSQL",
+    ],
+    github: "ikkii-org",
     live: "https://ikkii.app",
   },
   {
     name: "Postboy TUI",
-    description: "Terminal-based API testing tool with beautiful TUI interface. Test REST APIs directly from your terminal.",
+    description:
+      "Terminal-based API testing tool with beautiful TUI interface. Test REST APIs directly from your terminal.",
     tech: ["TypeScript", "Ink", "React"],
     github: "Postboy-tui/app",
     live: "https://www.npmjs.com/package/postboy-tui",
@@ -36,35 +48,40 @@ const projectsData: Project[] = [
   },
   {
     name: "BlogStack",
-    description: "Full-stack blogging platform with cross-posting support. Write once, publish everywhere.",
+    description:
+      "Full-stack blogging platform with cross-posting support. Write once, publish everywhere.",
     tech: ["Remix", "TypeScript", "Prisma"],
     github: "shivaraj110/BlogStack-remix",
     live: "https://blogstack-ruby.vercel.app",
   },
   {
     name: "ShelfCook",
-    description: "Mobile app for recipe management and meal planning with smart shopping lists.",
+    description:
+      "Mobile app for recipe management and meal planning with smart shopping lists.",
     tech: ["React Native", "Expo", "TypeScript"],
     github: "shivaraj110/sc-newui",
     live: "https://shelfcook.netlify.app/",
   },
   {
     name: "Flowro Landing",
-    description: "SaaS agency landing page with modern animations and micro-interactions.",
+    description:
+      "SaaS agency landing page with modern animations and micro-interactions.",
     tech: ["React", "Tailwind", "TypeScript"],
     github: "shivaraj110/Flowro-landing",
     live: "https://flowro.netlify.app/",
   },
   {
     name: "FontAI",
-    description: "AI-powered font picker with intelligent pairing suggestions based on your design context.",
+    description:
+      "AI-powered font picker with intelligent pairing suggestions based on your design context.",
     tech: ["TypeScript", "React", "Vite"],
     github: "shivaraj110/fontAI",
     live: "https://fontpickerai.netlify.app/",
   },
   {
     name: "Pomo TUI",
-    description: "Minimalist terminal pomodoro timer for focused productivity sessions.",
+    description:
+      "Minimalist terminal pomodoro timer for focused productivity sessions.",
     tech: ["TypeScript", "Ink"],
     github: "shivaraj110/pomo-tui",
     live: "https://www.npmjs.com/package/pomo-tui",
@@ -72,25 +89,38 @@ const projectsData: Project[] = [
   },
   {
     name: "StoreLinks",
-    description: "Browser extension for smart bookmark management and categorization.",
+    description:
+      "Browser extension for smart bookmark management and categorization.",
     tech: ["TypeScript", "Chrome API"],
     github: "shivaraj110/store-links",
   },
   {
     name: "WebRTC Signaling",
-    description: "Real-time signaling server for peer-to-peer WebRTC connections.",
+    description:
+      "Real-time signaling server for peer-to-peer WebRTC connections.",
     tech: ["TypeScript", "WebSockets"],
     github: "shivaraj110/webRTC-signaling-server",
   },
 ];
 
-export function Projects({ onBringToFront, zIndex, width, draggable = true }: ProjectsProps) {
+export function Projects({
+  onBringToFront,
+  zIndex,
+  width,
+  draggable = true,
+}: ProjectsProps) {
   const [selected, setSelected] = useState(0);
 
   const selectedProject = projectsData[selected];
 
   return (
-    <RetroWindow title="projects.pdf" onBringToFront={onBringToFront} zIndex={zIndex} width={width} draggable={draggable}>
+    <RetroWindow
+      title="projects.pdf"
+      onBringToFront={onBringToFront}
+      zIndex={zIndex}
+      width={width}
+      draggable={draggable}
+    >
       <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-4 md:gap-6">
         <div className="space-y-1">
           {projectsData.map((project, index) => {
@@ -112,7 +142,9 @@ export function Projects({ onBringToFront, zIndex, width, draggable = true }: Pr
                 <span className="flex items-center gap-2">
                   <span
                     className={`w-1.5 h-1.5 rounded-full ${
-                      isSelected ? "bg-[var(--color-terminal-green)]" : "bg-[var(--color-border-strong)]"
+                      isSelected
+                        ? "bg-[var(--color-terminal-green)]"
+                        : "bg-[var(--color-border-strong)]"
                     }`}
                   />
                   {project.name}
@@ -156,7 +188,10 @@ export function Projects({ onBringToFront, zIndex, width, draggable = true }: Pr
                   </p>
                   <div className="flex flex-wrap gap-3">
                     {selectedProject.tech.map((t) => (
-                      <span key={t} className="text-sm font-mono text-[var(--color-text-muted)]">
+                      <span
+                        key={t}
+                        className="text-sm font-mono text-[var(--color-text-muted)]"
+                      >
                         {t}
                       </span>
                     ))}
