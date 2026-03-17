@@ -6,7 +6,7 @@ export function MobileThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="fixed bottom-24 right-4 z-50 p-3 rounded-full bg-[var(--color-window-bg)] border border-[var(--color-border)] shadow-lg hover:shadow-xl transition-all"
+      className="fixed bottom-4 right-4 z-50 p-3 rounded-full bg-[var(--color-window-bg)] border border-[var(--color-border)] shadow-lg hover:shadow-xl transition-all"
     >
       {theme === "light" ? (
         <svg className="w-5 h-5 text-[#ffb000]" fill="currentColor" viewBox="0 0 24 24">
