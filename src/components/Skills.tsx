@@ -24,6 +24,7 @@ const skills = [
   "Prisma",
   "Drizzle",
   "Redis",
+  "BullMQ",
   "GraphQL",
   "Docker",
   "AWS",
@@ -32,9 +33,20 @@ const skills = [
   "Linux",
 ];
 
-export function Skills({ onBringToFront, zIndex, width, draggable = true }: SkillsProps) {
+export function Skills({
+  onBringToFront,
+  zIndex,
+  width,
+  draggable = true,
+}: SkillsProps) {
   return (
-    <RetroWindow title="tools.pdf" onBringToFront={onBringToFront} zIndex={zIndex} width={width} draggable={draggable}>
+    <RetroWindow
+      title="tools.pdf"
+      onBringToFront={onBringToFront}
+      zIndex={zIndex}
+      width={width}
+      draggable={draggable}
+    >
       <div className="space-y-4">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -47,12 +59,16 @@ export function Skills({ onBringToFront, zIndex, width, draggable = true }: Skil
               <span className="text-white font-mono text-sm font-bold">TS</span>
             </div>
             <div>
-              <span className="font-mono text-base text-[var(--color-text)] font-semibold">TypeScript</span>
-              <p className="text-xs text-[var(--color-text-subtle)] font-mono">Primary language</p>
+              <span className="font-mono text-base text-[var(--color-text)] font-semibold">
+                TypeScript
+              </span>
+              <p className="text-xs text-[var(--color-text-subtle)] font-mono">
+                Primary language
+              </p>
             </div>
           </div>
         </motion.div>
-        
+
         <div className="flex flex-wrap gap-1.5">
           {skills.map((skill, index) => (
             <motion.span
