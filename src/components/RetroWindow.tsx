@@ -40,16 +40,20 @@ export function RetroWindow({
     >
       <div className={`relative bg-[var(--color-window-bg)] window-scattered rounded-lg overflow-hidden transition-all duration-200 ${isDragging ? 'shadow-2xl ring-2 ring-[var(--color-accent)]/50' : ''}`}>
         <div className="relative">
-          <div className={`flex items-center justify-between px-4 py-2.5 bg-[var(--color-window-header)] border-b border-[var(--color-border)] ${draggable ? 'cursor-grab' : ''} select-none`}>
-            <span className="font-mono text-xs text-[var(--color-text-muted)] tracking-wider pointer-events-none">{title}</span>
-            <button 
-              onClick={(e) => e.stopPropagation()}
-              className="text-[var(--color-text-muted)] hover:text-red-500 transition-colors text-xl leading-none font-mono px-2"
-            >
-              ×
-            </button>
+          <div className={`relative ${draggable ? 'cursor-grab' : ''} select-none`}>
+            <div className="absolute -top-3 left-6 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[12px] border-t-[var(--color-window-header)]" />
+            <div className="absolute -top-3 left-6 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[10px] border-t-[var(--color-border-strong)]" />
+            <div className="flex items-center justify-between px-4 pt-4 pb-2.5 bg-[var(--color-window-header)] border border-[var(--color-border-strong)] rounded-t-lg">
+              <span className="font-mono text-xs text-[var(--color-text-muted)] tracking-wider pointer-events-none">{title}</span>
+              <button 
+                onClick={(e) => e.stopPropagation()}
+                className="text-[var(--color-text-muted)] hover:text-red-500 transition-colors text-xl leading-none font-mono px-2"
+              >
+                ×
+              </button>
+            </div>
           </div>
-          <div className="p-6 bg-[var(--color-window-bg)] paper-texture pointer-events-auto">
+          <div className="p-6 bg-[var(--color-window-bg)] paper-texture pointer-events-auto border-x border-b border-[var(--color-border-strong)] rounded-b-lg">
             {children}
           </div>
         </div>
