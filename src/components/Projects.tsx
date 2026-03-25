@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RetroWindow } from "./RetroWindow";
 
 interface ProjectsProps {
@@ -16,6 +16,10 @@ interface Project {
   github: string;
   live?: string;
   npmPackage?: string;
+}
+
+interface NpmDownloads {
+  [key: string]: number;
 }
 
 const projectsData: Project[] = [
@@ -110,6 +114,33 @@ export function Projects({
   draggable = true,
 }: ProjectsProps) {
   const [selected, setSelected] = useState(0);
+  const [npmDownloads, setNpmDownloads] = useState<NpmDownloads>({});
+
+  useEffect(() => {
+    const fetchNpmDownloads = async () => {
+      const packages = ["postboy-tui", "pomo-tui"];
+      const results: NpmDownloads = {};
+      await Promise.all(
+        packages.map(async (pkg) => {
+          try {
+            const res = await fetch(
+              `https://api.npmjs.org/downloads/range/2010-01-01:2030-01-01/${pkg}`
+            );
+            const data = await res.json();
+            const total = data.downloads.reduce(
+              (sum: number, day: { downloads: number }) => sum + day.downloads,
+              0
+            );
+            results[pkg] = total;
+          } catch {
+            results[pkg] = 0;
+          }
+        })
+      );
+      setNpmDownloads(results);
+    };
+    fetchNpmDownloads();
+  }, []);
 
   const selectedProject = projectsData[selected];
 
@@ -197,6 +228,17 @@ export function Projects({
                     ))}
                   </div>
                 </div>
+
+                {selectedProject.npmPackage && npmDownloads[selectedProject.npmPackage] !== undefined && (
+                  <div className="mb-6">
+                    <p className="text-xs font-mono text-[var(--color-text-subtle)] uppercase tracking-wider mb-2">
+                      Total Downloads
+                    </p>
+                    <p className="text-2xl font-mono text-[var(--color-terminal-green)]">
+                      {npmDownloads[selectedProject.npmPackage].toLocaleString()}
+                    </p>
+                  </div>
+                )}
 
                 <div className="flex items-center gap-6 pt-4 border-t border-[var(--color-border)] font-mono text-sm">
                   <a
