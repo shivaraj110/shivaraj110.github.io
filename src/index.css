@@ -1,64 +1,54 @@
 @import "tailwindcss";
 
 @theme {
-  --font-mono: 'IBM Plex Mono', monospace;
-  --font-serif: 'IBM Plex Serif', serif;
-  
-  --color-terminal-green: #22cc22;
-  --color-terminal-green-dark: #1aa31a;
-  --color-terminal-amber: #ffb000;
-  --color-terminal-blue: #0088ff;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-display: 'VT323', monospace;
 }
 
 :root {
-  --color-bg: #f5f0e8;
-  --color-bg-secondary: #e8dfd1;
-  --color-text: #1a1612;
-  --color-text-muted: #5c4a34;
-  --color-text-subtle: #8b7355;
-  --color-window-bg: #ffffff;
-  --color-window-header: #f0ebe3;
-  --color-border: #d4c4a8;
-  --color-border-strong: #b8a07a;
-  --color-accent: #8b7355;
-  --color-gradient-start: #f5f0e8;
-}
-
-.dark {
-  --color-bg: #1a1612;
-  --color-bg-secondary: #2a2420;
-  --color-text: #f5f0e8;
-  --color-text-muted: #c4b89a;
-  --color-text-subtle: #8b7355;
-  --color-window-bg: #2a2420;
-  --color-window-header: #3d352d;
-  --color-border: #4a4035;
-  --color-border-strong: #5c4a34;
-  --color-accent: #b8a07a;
-  --color-gradient-start: #2a2420;
+  --ink-bg: #04060b;
+  --ink-frame: #3b5c8f;
+  --ink-frame-dim: #22406e;
+  --ink-frame-bright: #7ea6dd;
+  --ink-text: #b8d4ff;
+  --ink-text-bright: #e6f1ff;
+  --ink-text-glow: #dcebff;
+  --ink-text-dim: #5d7ba8;
+  --ink-text-faint: #3f6296;
+  --ink-accent: #9cc4ff;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--ink-bg);
 }
 
 body {
-  margin: 0;
-  font-family: var(--font-serif);
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  font-family: var(--font-mono);
+  color: var(--ink-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: var(--ink-text);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #eef5ff;
+  text-shadow: 0 0 8px rgba(140, 190, 255, 0.9);
 }
 
 ::selection {
-  background-color: var(--color-accent);
-  color: var(--color-bg);
+  background: var(--ink-text);
+  color: var(--ink-bg);
 }
 
 ::-webkit-scrollbar {
@@ -67,63 +57,97 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg);
+  background: var(--ink-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 4px;
+  background: var(--ink-frame-dim);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-border-strong);
+  background: var(--ink-frame);
 }
 
-.window-scattered {
-  box-shadow: 
-    0 0 0 1px var(--color-border),
-    0 25px 50px -12px rgba(0, 0, 0, 0.15),
-    0 4px 16px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
+@keyframes blink {
+  0%, 55% { opacity: 1; }
+  56%, 100% { opacity: 0; }
 }
 
-.dark .window-scattered {
-  box-shadow: 
-    0 0 0 1px var(--color-border),
-    0 25px 50px -12px rgba(0, 0, 0, 0.6),
-    0 4px 16px rgba(0, 0, 0, 0.4);
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
 }
 
-.crt-lines {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.03) 2px,
-    rgba(0, 0, 0, 0.03) 4px
-  );
-  pointer-events: none;
+.blink {
+  animation: blink 1.4s step-end infinite;
 }
 
-.dark .crt-lines {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.05) 2px,
-    rgba(0, 0, 0, 0.05) 4px
-  );
+.blink-fast {
+  animation: blink 1.2s step-end infinite;
 }
 
-.paper-texture {
-  background-image: 
-    linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
-  background-size: 20px 20px;
+.pulse-dot {
+  animation: pulseDot 2s infinite;
 }
 
-.dark .paper-texture {
-  background-image: 
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+.pulse-dot-fast {
+  animation: pulseDot 1.6s infinite;
+}
+
+/* hover glow for button-styled links (discord copy) */
+.link-btn:hover {
+  color: #eef5ff;
+  text-shadow: 0 0 8px rgba(140, 190, 255, 0.9);
+}
+
+/* responsive grid frames — desktop matches the design exactly */
+.dossier-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 360px) 1fr;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) 1fr;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+@media (max-width: 760px) {
+  .dossier-grid,
+  .projects-grid,
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dossier-grid > div:first-child,
+  .projects-grid > div:first-child {
+    border-right: none !important;
+    border-bottom: 1px solid var(--ink-frame);
+  }
+
+  .wordmark-title {
+    font-size: 32px !important;
+    letter-spacing: 0.22em !important;
+  }
+
+  .wordmark-hexes {
+    display: none !important;
+  }
+
+  .personnel-row span {
+    font-size: 18px !important;
+  }
+
+  .footer-bands {
+    flex-direction: column;
+  }
+
+  .footer-bands > div {
+    width: 100%;
+  }
 }
