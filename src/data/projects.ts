@@ -3,12 +3,22 @@ export interface Project {
   tag: string
   desc: string
   tech: string
-  github: string
+  // omitted for private client repos
+  github?: string
   live?: string
   npm?: string
+  freelance?: boolean
 }
 
 export const projects: Project[] = [
+  {
+    name: 'ghost.blog',
+    tag: 'SaaS / AI',
+    desc: 'AI content marketing and SEO automation. Brands hire AI "Ghost Writers" with their own voice that research, write, SEO-score and auto-publish articles to WordPress on a schedule — plus a companion WordPress plugin that syncs SEO metadata into Yoast, Rank Math and AIOSEO.',
+    tech: 'Next.js, Supabase, Drizzle, PostgreSQL, BullMQ, Redis, Gemini, Stripe, Payload CMS, Bun WebSockets, WordPress (PHP)',
+    live: 'https://ghost.blog',
+    freelance: true,
+  },
   {
     name: 'Codrop',
     tag: 'Dev tool / P2P',

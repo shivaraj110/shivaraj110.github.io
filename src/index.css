@@ -172,6 +172,16 @@ a.value:hover,
   color: var(--brand);
 }
 
+.badge {
+  margin-left: 12px;
+  padding: 1px 6px;
+  border: 1px solid var(--brand);
+  color: var(--brand);
+  font-size: 10px;
+  text-transform: uppercase;
+  vertical-align: 1px;
+}
+
 .card-top {
   display: flex;
   justify-content: space-between;

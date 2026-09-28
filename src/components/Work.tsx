@@ -12,7 +12,10 @@ function Card({ project, index, downloads }: { project: Project; index: number; 
       transition={{ duration: 0.5, delay: (index % 3) * 0.08, ease: 'easeOut' }}
     >
       <div className="card-top text-sm">
-        <span>{String(index + 1).padStart(2, '0')}</span>
+        <span>
+          {String(index + 1).padStart(2, '0')}
+          {project.freelance && <span className="badge">Freelance</span>}
+        </span>
         <span>{project.tag}</span>
       </div>
       <h3 className="display h2 card-name">{project.name}</h3>
@@ -32,9 +35,11 @@ function Card({ project, index, downloads }: { project: Project; index: number; 
         )}
       </div>
       <div className="card-links text-sm">
-        <a href={'https://github.com/' + project.github} target="_blank" rel="noopener">
-          Source ↗
-        </a>
+        {project.github && (
+          <a href={'https://github.com/' + project.github} target="_blank" rel="noopener">
+            Source ↗
+          </a>
+        )}
         {project.live && (
           <a href={project.live} target="_blank" rel="noopener">
             Live ↗
